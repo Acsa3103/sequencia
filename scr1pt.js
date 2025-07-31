@@ -1,33 +1,45 @@
+// Função principal que realiza a contagem
 function contar() {
-  var startNumber = document.getElementById("start");
-  var endNumber = document.getElementById("end");
-  var stepNumber = document.getElementById("step");
-  var result = document.getElementById("result");
+  // Obtém os elementos de entrada e o elemento de resultado pelo ID
+  var startNumber = document.getElementById("start"); // Início da contagem
+  var endNumber = document.getElementById("end");     // Fim da contagem
+  var stepNumber = document.getElementById("step");   // Passo da contagem
+  var result = document.getElementById("result");     // Elemento onde o resultado será exibido
 
-  if (startNumber.value === "" || endNumber.value === "" || stepNumber.value === "") {
-    result.innerHTML = "Impossível contar!";
+  // Verifica se algum dos campos de entrada está vazio
+  if (startNumber.value.length == 0 || endNumber.value.length == 0 || stepNumber.value.length == 0) {
+      result.innerHTML = "Impossível contar!"; // Exibe mensagem de erro
   } else {
-    result.innerHTML = "Contando: <br>";
-    result.innerHTML += "🏠 ";
-    let i = Number(startNumber.value);
-    let f = Number(endNumber.value);
-    let p = Number(stepNumber.value);
+      // Inicializa a área de resultados
+      result.innerHTML = "Contando: <br>";
+      result.innerHTML += "🏠 "; // Ícone de casa indicando início
 
-    if (p <= 0) {
-      window.alert("Erro: passo deve ser maior que zero!");
-      p = 1;
-    }
-    if (i < f) {
-      // Contagem crescente
-      for (let c = i; c <= f; c += p) {
-        result.innerHTML += `${c} ✌🏻 `;
+      // Converte os valores de entrada para números
+      let i = Number(startNumber.value); // Valor inicial
+      let f = Number(endNumber.value);   // Valor final
+      let p = Number(stepNumber.value);  // Passo
+
+      // Verifica se o passo é válido
+      if (p <= 0) {
+          // Exibe um alerta informando que o passo é inválido
+          window.alert("Passo inválido. Considerando passo 1");
+          p = 1; // Define o passo como 1
       }
-    } else {
-      // Contagem regressiva
-      for (let c = i; c >= f; c -= p) {
-        result.innerHTML += `${c} ✌🏻 `;
+
+      // Verifica a direção da contagem
+      if (i < f) {
+          // Contagem crescente
+          for (let c = i; c <= f; c += p) {
+              result.innerHTML += `${c} ✌🏻 `; // Exibe cada número com o emoji de paz
+          }
+      } else {
+          // Contagem regressiva
+          for (let c = i; c >= f; c -= p) {
+              result.innerHTML += `${c} ✌🏻 `; // Exibe cada número com o emoji de paz
+          }
       }
-    }
-    result.innerHTML += `🏁`;
+
+      // Exibe o emoji de bandeira quadriculada indicando o fim da contagem
+      result.innerHTML += `🏁`;
   }
 }
